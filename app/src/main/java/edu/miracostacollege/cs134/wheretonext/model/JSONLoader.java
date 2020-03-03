@@ -36,16 +36,28 @@ public class JSONLoader {
 
         try {
             JSONObject jsonRootObject = new JSONObject(json);
-            JSONArray allCountriesJSON = jsonRootObject.getJSONArray("Colleges");
+            JSONArray allCollegesJSON = jsonRootObject.getJSONArray("Colleges");
 
-            // TODO: Loop through all the colleges in the JSON data, create a College object for each
-            
-            // TODO: Add each college object to the list
+            // done: Loop through all the colleges in the JSON data, create a College object for each
+                JSONObject collegeJSON;
+                int count = allCollegesJSON.length();
+                String name;
+                int pop;
+                double tuition, rating;
+            for (int i = 0 ; i < count; i++) {
+                collegeJSON = allCollegesJSON.getJSONObject(i);
+                name = collegeJSON.getString("Name");
+                pop = collegeJSON.getInt("Population");
+                tuition = collegeJSON.getDouble("Tuition");
+                rating = collegeJSON.getDouble("Rating");
+                allCollegesList.add(new College(name, pop, tuition,rating));
+            }
+            // done: Add each college object to the list
 
 
 
         } catch (JSONException e) {
-            Log.e("Flag Quiz", e.getMessage());
+            Log.e("Where To Next", e.getMessage());
         }
 
         return allCollegesList;
